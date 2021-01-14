@@ -8,6 +8,7 @@ form.addEventListener('submit',(e)=>{
     document.getElementById('p1').innerHTML = "Loading..."
     document.getElementById('p2').innerHTML = ""
     const mainurl = inputdata.value
+   
     
     data12 = {  
         "URL": mainurl,    
@@ -21,14 +22,19 @@ form.addEventListener('submit',(e)=>{
         body: JSON.stringify(data12) 
     } 
 
-    let fetchRes = fetch('/dwadaw',options); 
+    let fetchRes = fetch('/genCode',options); 
     fetchRes.then(res => 
         res.json()).then((d) => { 
             if(d.error){
                 document.getElementById('p1').innerHTML = "Error : Server side error.Please wait and try again"
             }else{
-                document.getElementById('p2').innerHTML = "This URL is only valid for 14 Days as per MINIURL Policy";
+                if(d.newurl !== undefined){
+                document.getElementById('p2').innerHTML = "*This URL is only valid for 14 Days as per MINIURL Policy*";
                 document.getElementById('p1').innerHTML = d.newurl;
+                }else{
+                    document.getElementById('p1').innerHTML = 'Opps, Can you please try again?'
+                }
             }
         }) 
+    
 })

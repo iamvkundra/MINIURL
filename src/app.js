@@ -21,13 +21,13 @@ hbs.registerPartials(partialsPath)
 
 app.use(express.static(pathValue))
 
-app.get('/home',(req,res)=>{
+app.get('/',(req,res)=>{
     res.render('index',{
         companyName :'MINIURL'
     })
 })
 
-app.post('/:id',async (req,res)=>{
+app.post('/genCode',async (req,res)=>{
     const body = req.body;
     try{
         const Numb = randomNum.gR();
@@ -48,15 +48,12 @@ app.post('/:id',async (req,res)=>{
 })
 app.get('/:URL',async (req,res)=>{
     const URL = req.params.URL;
-    
     try{
         const data = await schema1.CheckTheCode(URL);
-        console.log(data)
         res.status(301).redirect(data.MAINURL)
     }catch(e){
-        res.status(400).send(e);
+        res.status(400).redirect('../');
     }
-    //res.send("find the url and redirect to that page");
 })
 
 const PORT = process.env.PORT ;
