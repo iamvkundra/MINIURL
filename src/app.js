@@ -30,6 +30,12 @@ app.get('/',(req,res)=>{
 app.post('/genCode',async (req,res)=>{
     const body = req.body;
     try{
+        const checkURL = await schema1.checktheURL(body.URL)
+        if(checkURL !== null){
+            return res.send({
+                newurl : "localhost:1492/"+checkURL
+            });
+        }
         const Numb = randomNum.gR();
         const iurl= body.URL;
         const userdata = new schema1({

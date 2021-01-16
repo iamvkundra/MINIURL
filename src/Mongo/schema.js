@@ -21,5 +21,12 @@ if(!validCode){
 }
 return validCode;
 }
+tableSchema.statics.checktheURL = async (URL)=>{
+    const vaildurl = await data1.findOne({MAINURL:URL});
+    if(vaildurl !== null){
+        return vaildurl.KeyValue
+    }
+    return null  // check the url is already present or not
+}
 const data1 = mongo.model('Data',tableSchema);
 module.exports = data1;

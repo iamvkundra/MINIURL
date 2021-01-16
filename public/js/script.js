@@ -1,4 +1,3 @@
-console.log("HELLO")
 const form = document.querySelector('form')
 const inputdata = document.querySelector('input')
 const message = document.getElementById('p1')
